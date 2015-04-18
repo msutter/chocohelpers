@@ -1,6 +1,4 @@
-# this file was automatically generated with the Powershell scPackageTools module
-
-$packageName = "chocolateypkghelpers"
+$packageName = "chocolateyPkgHelpers"
 $moduleName = "chocolateyPkgHelpers"
 
 try {
