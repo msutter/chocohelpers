@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- this file was automatically generated with the scPackageTools Powershell module -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>chocolateypkghelpers</id>
+    <version>1.0.0</version>
+    <authors>Marc Sutter</authors>
+    <owners></owners>
+    <projectUrl>https://gitlab.swisscloud.io/powershell/chocolateypkghelpers</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Powershell Module providing Chocolatey Package Manager Helpers</description>
+    <copyright>Marc Sutter 2014</copyright>
+    <tags>chocolateypkghelpers Chocolatey Powershell Module</tags>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <file src="**" target="files\chocolateyPkgHelpers" exclude="tools\**;**\*.Psake.ps1;**\*.Psake.psm1;**\*.Tests.ps1;**\*.Tests.psm1" />
+  </files>
+</package>
