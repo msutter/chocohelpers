@@ -4,8 +4,7 @@ try {
   $PackagePath = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 
   # Include chocolateyPkgHelpers Module
-  Import-Module -Name "${PackagePath}\chocolateyPkgHelpers.psm1" -Force
-
+  Import-Module -Name "${PackagePath}\tools\chocolateyPkgHelpers\chocolateyPkgHelpers.psm1" -Force
 
   # Load Package Datas
   $ChocoPkgData = Get-ChocoPkgData -PackagePath $PackagePath
