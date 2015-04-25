@@ -50,7 +50,7 @@ function New-ChocoManifest
   # This path must exists !
   #   if not create it in the chocolateyBeforeInstall.ps1 script
   #   also remove it in the chocolateyAfterUninstall.ps1 script
-  Prefix = `"${Prefix}"
+  Prefix = `"${Prefix}`"
 
 }
 "
