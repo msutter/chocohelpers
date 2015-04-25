@@ -29,6 +29,14 @@ function Copy-ChocoToolsScripts
     $FilesPath = "$ModulePath/files"
     Write-Verbose "FilesPath: ${FilesPath}"
 
-    $null = Get-ChildItem $FilesPath -Filter *.ps1 | Copy-Item -Destination $AbsToolsDirectory
+    $null = Copy-Item -Path "${FilesPath}\chocolateyUninstall_ps1" `
+        -Destination "${AbsToolsDirectory}\chocolateyUninstall.ps1"
+
+    $null = Copy-Item -Path "${FilesPath}\chocolateyInstall_ps1" `
+        -Destination "${AbsToolsDirectory}\chocolateyInstall.ps1"
+
+    $null = Copy-Item -Path "${FilesPath}\chocolateyPkg_psd1" `
+        -Destination "${AbsToolsDirectory}\chocolateyPkg.psd1"
+
 }
 
