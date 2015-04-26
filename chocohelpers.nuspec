@@ -2,11 +2,11 @@
 <!-- this file was automatically generated with the scPackageTools Powershell module -->
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>chocolateypkghelpers</id>
+    <id>chocoHelpers</id>
     <version>1.0.0</version>
     <authors>Marc Sutter</authors>
     <owners></owners>
-    <projectUrl>https://gitlab.swisscloud.io/powershell/chocolateypkghelpers</projectUrl>
+    <projectUrl>https://gitlab.swisscloud.io/powershell/chocoHelpers</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Powershell Module providing Chocolatey Package Manager Helpers</description>
     <copyright>Marc Sutter 2014</copyright>

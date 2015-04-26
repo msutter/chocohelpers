@@ -1,5 +1,5 @@
-$packageName = "chocolateyPkgHelpers"
-$moduleName = "chocolateyPkgHelpers"
+$packageName = "chocoHelpers"
+$moduleName = "chocoHelpers"
 
 try {
   $installDir = Join-Path $PSHome "Modules"

@@ -27,14 +27,19 @@ function Get-ChocoPkgData
 
         [Parameter(Mandatory=$false, Position=2)]
         [System.String]
-        $FilesFolderName = 'files'
+        $FilesFolderName = 'files',
+
+        [Parameter(Mandatory=$false, Position=2)]
+        [System.String]
+        $ChocoManifestFileName = 'chocolatey.psd1'
     )
 
-    $FilesPath = Join-Path $PackagePath $FilesFolderName
-    $ToolsPath = Join-Path $PackagePath $ToolsFolderName
+    $FilesPath         = Join-Path $PackagePath $FilesFolderName
+    $ToolsPath         = Join-Path $PackagePath $ToolsFolderName
+    $ChocoManifestPath = Join-Path $ToolsPath $ChocoManifestFileName
 
     # Load Data from chocolatey.psd1
-    $ChocoData = Get-Content $ToolsPath\chocolateyPkg.psd1 | Out-String | iex
+    $ChocoData = Get-Content $ChocoManifestPath | Out-String | iex
 
     # # Pathes Validations
     # $PackagePathExists = Test-Path $PackagePath
