@@ -36,7 +36,7 @@ function Get-ChocoPkgItems
         }
 
         $SourcePath = $item.FullName
-        $TargetPath = ($SourcePath -replace [regex]::Escape($FilesPath), $Prefix)
+        $TargetPath = ($SourcePath -replace [regex]::Escape($FilesPath), "${Prefix}")
         $PkgItem = New-ChocoPkgItem -SourcePath $SourcePath -TargetPath $TargetPath -ItemType $ItemType
         $trash = $PkgItems.add($PkgItem)
     }

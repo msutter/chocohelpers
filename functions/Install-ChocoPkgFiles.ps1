@@ -28,7 +28,7 @@ function Install-ChocoPkgFiles
     if (!([string]::IsNullOrEmpty($ChocoPkgData.Prefix))) {
 
         # Create the prefix path
-        if (!(Test-Path -path $ChocoPkgData.Prefix)) {
+        if (!(Test-Path -path "$($ChocoPkgData.Prefix)")) {
             Write-ChocolateyFailure $ChocoPkgData.PackageId "$($ChocoPkgData.Prefix) (Prefix) must exist ! "
             throw
         }
