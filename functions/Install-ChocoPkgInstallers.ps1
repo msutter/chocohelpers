@@ -19,7 +19,7 @@ function Install-ChocoPkgInstallers
         [String]
         $FilesPath = $script:FilesPath,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [String]
         $PackageId = $script:PackageId
     )

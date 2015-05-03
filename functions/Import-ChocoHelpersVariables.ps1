@@ -35,9 +35,6 @@ function Import-ChocoHelpersVariables
     # Load Data from chocolatey.psd1
     $ChocoData = Get-Content $ChocoManifestPath | Out-String | iex
 
-    # Add Package Path to datas
-    $null = $ChocoData.Add('PackagePath', $PackagePath)
-
     # Add tools path to datas
     $null = $ChocoData.Add('ToolsPath', $ToolsPath)
 
@@ -55,6 +52,8 @@ function Import-ChocoHelpersVariables
             New-Variable -Name $Var -Value $ChocoData.$Var -Scope Script
         }
     }
+
+    return $ChocoData
 
 }
 

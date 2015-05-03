@@ -19,7 +19,7 @@ function Uninstall-ChocoPkgFiles
         [String]
         $FilesPath = $script:FilesPath,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [String]
         $PackageId = $script:PackageId
     )

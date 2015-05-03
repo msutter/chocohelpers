@@ -22,7 +22,7 @@ function Get-ChocoPkgItems
 
     $PkgItems  = New-Object System.Collections.ArrayList
 
-    foreach ($item in (Get-ChildItem -Path $FilesPath -Recurse))
+    foreach ($item in (Get-ChildItem -Path "${FilesPath}" -Recurse))
     {
         if ($item.PSIsContainer) {
             $ItemType = 'directory'
@@ -31,8 +31,8 @@ function Get-ChocoPkgItems
         }
 
         $SourcePath = $item.FullName
-        $TargetPath = ($SourcePath -replace [regex]::Escape($FilesPath), "${Prefix}")
-        $PkgItem    = New-ChocoPkgItem -SourcePath $SourcePath -TargetPath $TargetPath -ItemType $ItemType
+        $TargetPath = ($SourcePath -replace [regex]::Escape("${FilesPath}"), "${Prefix}")
+        $PkgItem    = New-ChocoPkgItem -SourcePath "${SourcePath}" -TargetPath "${TargetPath}" -ItemType $ItemType
         $null       = $PkgItems.add($PkgItem)
     }
 
