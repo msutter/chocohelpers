@@ -41,7 +41,6 @@ function Uninstall-ChocoPkgFiles
                     $null = Remove-Item "$($item.TargetPath)"
                 }
 
-                $null = New-Item -Force -Type Directory "$($item.TargetPath)"
             } else {
                 $null = Remove-Item "$($item.TargetPath)"
             }
