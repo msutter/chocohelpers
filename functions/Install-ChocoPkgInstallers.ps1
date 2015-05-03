@@ -12,7 +12,7 @@ function Install-ChocoPkgInstallers
     param
     (
         [Parameter(Mandatory=$false)]
-        [HashTable]
+        [HashTable[]]
         $Installers = $script:Installers,
 
         [Parameter(Mandatory=$false)]

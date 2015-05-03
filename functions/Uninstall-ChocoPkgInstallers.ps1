@@ -12,7 +12,7 @@ function Uninstall-ChocoPkgUninstallers
     param
     (
         [Parameter(Mandatory=$false)]
-        [HashTable]
+        [HashTable[]]
         $Uninstallers = $script:Uninstallers,
 
         [Parameter(Mandatory=$false)]
