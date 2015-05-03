@@ -17,16 +17,19 @@ function Write-ChocoPkgFiles
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$true, Position=0)]
-        [System.Object]
-        $ChocoPkgData,
+        # [Parameter(Mandatory=$true)]
+        # [String]
+        # $Prefix,
+
+        # [Parameter(Mandatory=$true)]
+        # [String]
+        # $FilesPath,
 
         [Parameter(Mandatory=$false, Position=1)]
         [switch]
         $Uninstall
     )
-
-    $Items = Get-ChocoPkgItems $ChocoPkgData
+    $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath
 
     if ($Uninstall) {
         $SortedItems = $Items | Sort -Property TargetPath -Descending

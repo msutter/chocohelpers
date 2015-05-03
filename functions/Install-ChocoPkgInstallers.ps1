@@ -15,29 +15,37 @@ function Install-ChocoPkgInstallers
         can have as many examples as you like
     #>
     [CmdletBinding()]
-    param
-    (
-        [Parameter(Mandatory=$true, Position=0)]
-        [System.Object]
-        $ChocoPkgData
-    )
+    # param
+    # (
+    #     [Parameter(Mandatory=$true)]
+    #     [HashTable]
+    #     $Installers,
 
-    foreach ($Installer in $ChocoPkgData.Installers)
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $PackageId,
+
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $FilesPath
+    # )
+
+    foreach ($Installer in $Installers)
     {
 
         Write-Verbose "Installing $($Installer.File)"
 
         # get install setup extension
-        $InstallerExtension = $Installer['File'].split('.')[-1]
+        $InstallerExtension = $Installer.File.split('.')[-1]
 
-        if ([System.IO.Path]::IsPathRooted($Installer['File'])) {
-            $InstallerPath = $Installer['File']
+        if ([System.IO.Path]::IsPathRooted("$($Installer.File)")) {
+            $InstallerPath = "$($Installer.File)"
         } else {
-            $InstallerPath = Join-Path $ChocoPkgData.FilesPath $Installer['File']
+            $InstallerPath = Join-Path "${FilesPath}" "$($Installer.File)"
         }
 
         # Start the install Process
-        Install-ChocolateyPackage $ChocoPkgData.PackageId $InstallerExtension $Installer['Args'] $InstallerPath
+        Install-ChocolateyPackage $PackageId $InstallerExtension $Installer['Args'] "${InstallerPath}"
 
     }
 

@@ -15,21 +15,43 @@ function Uninstall-ChocoPkgFiles
         can have as many examples as you like
     #>
     [CmdletBinding()]
-    param
-    (
-        [Parameter(Mandatory=$true, Position=0)]
-        [System.Object]
-        $ChocoPkgData
-    )
+    # param
+    # (
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $Prefix,
 
-    $Items = Get-ChocoPkgItems $ChocoPkgData
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $PackageId,
+
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $FilesPath
+    # )
+
+    $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath
     $SortedItems = $Items | Sort -Property TargetPath -Descending
 
-    if (!([string]::IsNullOrEmpty($ChocoPkgData.Prefix))) {
+    if (!([string]::IsNullOrEmpty($Prefix))) {
         foreach ($item in $SortedItems)
         {
             Write-Verbose "Uninstalling $($item.TargetPath) ($($item.ItemType))"
-            Remove-Item -Force $item.TargetPath
+            if ($item.ItemType -eq 'directory') {
+                # check if directory is empty
+                if ((Get-ChildItem "$($item.TargetPath)").Count -gt 0) {
+                    # Directory is not empty, do not remove, but warn
+                    Write-Warning "$($item.TargetPath) is not empty ! Skipping deletion"
+                } else {
+                    # Directory is empty, removing it
+                    $null = Remove-Item "$($item.TargetPath)"
+                }
+
+                $null = New-Item -Force -Type Directory "$($item.TargetPath)"
+            } else {
+                $null = Remove-Item "$($item.TargetPath)"
+            }
+
         }
     }
 

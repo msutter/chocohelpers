@@ -15,15 +15,16 @@ function Get-ChocoPkgItems
         can have as many examples as you like
     #>
     [CmdletBinding()]
-    param
-    (
-        [Parameter(Mandatory=$true, Position=0)]
-        [System.Object]
-        $ChocoPkgData
-    )
+    # param
+    # (
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $Prefix,
 
-    $FilesPath = $ChocoPkgData.FilesPath
-    $Prefix    = $ChocoPkgData.Prefix
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $FilesPath
+    # )
 
     $PkgItems  = New-Object System.Collections.ArrayList
 

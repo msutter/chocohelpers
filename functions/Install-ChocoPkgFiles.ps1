@@ -15,21 +15,29 @@ function Install-ChocoPkgFiles
         can have as many examples as you like
     #>
     [CmdletBinding()]
-    param
-    (
-        [Parameter(Mandatory=$true, Position=0)]
-        [System.Object]
-        $ChocoPkgData
-    )
+    # param
+    # (
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $Prefix,
 
-    $Items = Get-ChocoPkgItems $ChocoPkgData
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $PackageId,
+
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $FilesPath
+    # )
+
+    $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath
     $SortedItems = $Items | Sort -Property TargetPath
 
-    if (!([string]::IsNullOrEmpty($ChocoPkgData.Prefix))) {
+    if (!([string]::IsNullOrEmpty($Prefix))) {
 
         # Create the prefix path
-        if (!(Test-Path -path "$($ChocoPkgData.Prefix)")) {
-            Write-ChocolateyFailure $ChocoPkgData.PackageId "$($ChocoPkgData.Prefix) (Prefix) must exist ! "
+        if (!(Test-Path -path "${Prefix}")) {
+            Write-ChocolateyFailure $PackageId "${Prefix} (Prefix) must exist ! "
             throw
         }
 
@@ -38,9 +46,9 @@ function Install-ChocoPkgFiles
             Write-Verbose "Installing $($item.TargetPath) ($($item.ItemType))"
 
             if ($item.ItemType -eq 'directory') {
-                $Trash = New-Item -Force -Type Directory $item.TargetPath
+                $Trash = New-Item -Force -Type Directory "$($item.TargetPath)"
             } else {
-                $Trash = Copy-Item -Force $item.SourcePath $item.TargetPath
+                $Trash = Copy-Item -Force "$($item.SourcePath)" "$($item.TargetPath)"
             }
         }
     }

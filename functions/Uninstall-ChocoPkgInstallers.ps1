@@ -15,21 +15,29 @@ function Uninstall-ChocoPkgUninstallers
         can have as many examples as you like
     #>
     [CmdletBinding()]
-    param
-    (
-        [Parameter(Mandatory=$true, Position=0)]
-        [System.Object]
-        $ChocoPkgData
-    )
+    # param
+    # (
+    #     [Parameter(Mandatory=$true)]
+    #     [HashTable]
+    #     $Uninstallers,
 
-    foreach ($Uninstaller in $ChocoPkgData.Uninstallers)
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $PackageId,
+
+    #     [Parameter(Mandatory=$true)]
+    #     [String]
+    #     $FilesPath
+    # )
+
+    foreach ($Uninstaller in $Uninstallers)
     {
 
         if ($Uninstaller.ContainsKey('WMI')) {
             # if there is no special Uninstaller Command use the windows wmi object to uninstall
 
             # Get the right wmi object
-            $Product = Get-WmiObject -Class Win32_Product | Where-Object {$_.name -like "$($Uninstaller['WMI'])*"}
+            $Product = Get-WmiObject -Class Win32_Product | Where-Object {$_.name -like "$($Uninstaller.WMI)*"}
 
             if($Product -and $Product.GetType().name -eq "ManagementObject"){
 
@@ -39,7 +47,7 @@ function Uninstall-ChocoPkgUninstallers
                 $ProductId = $Product.identifyingNumber
 
                 # set Uninstall Args
-                $UninstallArgs = "/uninstall $ProductId $($Uninstaller['Args'])"
+                $UninstallArgs = "/uninstall $ProductId $($Uninstaller.Args)"
 
                 # uninstall the vwm object
                 Start-Process -FilePath msiexec -ArgumentList "${UninstallArgs}" -Wait
@@ -47,13 +55,13 @@ function Uninstall-ChocoPkgUninstallers
             } else {
 
                 # else write an error
-                Write-ChocolateyFailure "$PackageId" "Product: $($Uninstaller['WMI']) Not Found"
+                Write-ChocolateyFailure "$PackageId" "Product: $($Uninstaller.WMI) Not Found"
                 throw
             }
 
         } elseif ($Uninstaller.ContainsKey('File')) {
             # else use the specific uninstaller
-            & $Uninstaller['File'] $Uninstaller['Args']
+            & "$($Uninstaller.File)" $Uninstaller.Args
         }
 
     }
