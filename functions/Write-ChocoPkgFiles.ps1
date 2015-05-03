@@ -1,34 +1,29 @@
 function Write-ChocoPkgFiles
 {
-    <#
-        .SYNOPSIS
-        Short Description
-        .DESCRIPTION
-        Detailed Description
-        .EXAMPLE
-        Install-ChocoPkgFiles
-        explains how to use the command
-        can be multiple lines
-        .EXAMPLE
-        Install-ChocoPkgFiles
-        another example
-        can have as many examples as you like
-    #>
+<#
+    .SYNOPSIS
+
+    .DESCRIPTION
+
+    .EXAMPLE
+
+#>
     [CmdletBinding()]
     param
     (
-        # [Parameter(Mandatory=$true)]
-        # [String]
-        # $Prefix,
+        [Parameter(Mandatory=$false)]
+        [String]
+        $Prefix = $script:Prefix,
 
-        # [Parameter(Mandatory=$true)]
-        # [String]
-        # $FilesPath,
+        [Parameter(Mandatory=$false)]
+        [String]
+        $FilesPath = $script:FilesPath,
 
         [Parameter(Mandatory=$false, Position=1)]
         [switch]
         $Uninstall
     )
+
     $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath
 
     if ($Uninstall) {

@@ -1,30 +1,24 @@
 function Get-ChocoPkgItems
 {
-    <#
-        .SYNOPSIS
-        Short Description
-        .DESCRIPTION
-        Detailed Description
-        .EXAMPLE
-        Get-PkgFilesList
-        explains how to use the command
-        can be multiple lines
-        .EXAMPLE
-        Get-PkgFilesList
-        another example
-        can have as many examples as you like
-    #>
-    [CmdletBinding()]
-    # param
-    # (
-    #     [Parameter(Mandatory=$true)]
-    #     [String]
-    #     $Prefix,
+<#
+    .SYNOPSIS
 
-    #     [Parameter(Mandatory=$true)]
-    #     [String]
-    #     $FilesPath
-    # )
+    .DESCRIPTION
+
+    .EXAMPLE
+
+#>
+    [CmdletBinding()]
+    param
+    (
+        [Parameter(Mandatory=$false)]
+        [String]
+        $Prefix = $script:Prefix,
+
+        [Parameter(Mandatory=$false)]
+        [String]
+        $FilesPath = $script:FilesPath
+    )
 
     $PkgItems  = New-Object System.Collections.ArrayList
 

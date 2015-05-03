@@ -1,5 +1,13 @@
 Function Get-PuppeRole
 {
+<#
+    .SYNOPSIS
+
+    .DESCRIPTION
+
+    .EXAMPLE
+
+#>
     [CmdletBinding()]
     Param
     (

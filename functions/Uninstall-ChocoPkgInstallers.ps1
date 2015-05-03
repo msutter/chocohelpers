@@ -1,34 +1,28 @@
 function Uninstall-ChocoPkgUninstallers
 {
-    <#
-        .SYNOPSIS
-        Short Description
-        .DESCRIPTION
-        Detailed Description
-        .EXAMPLE
-        Install-ChocoPkgFiles
-        explains how to use the command
-        can be multiple lines
-        .EXAMPLE
-        Install-ChocoPkgFiles
-        another example
-        can have as many examples as you like
-    #>
+<#
+    .SYNOPSIS
+
+    .DESCRIPTION
+
+    .EXAMPLE
+
+#>
     [CmdletBinding()]
-    # param
-    # (
-    #     [Parameter(Mandatory=$true)]
-    #     [HashTable]
-    #     $Uninstallers,
+    param
+    (
+        [Parameter(Mandatory=$false)]
+        [HashTable]
+        $Uninstallers = $script:Uninstallers,
 
-    #     [Parameter(Mandatory=$true)]
-    #     [String]
-    #     $PackageId,
+        [Parameter(Mandatory=$false)]
+        [String]
+        $FilesPath = $script:FilesPath,
 
-    #     [Parameter(Mandatory=$true)]
-    #     [String]
-    #     $FilesPath
-    # )
+        [Parameter(Mandatory=$true)]
+        [String]
+        $PackageId = $script:PackageId
+    )
 
     foreach ($Uninstaller in $Uninstallers)
     {

@@ -1,12 +1,13 @@
 function Import-ChocoHelpersVariables
 {
-    <#
-        .SYNOPSIS
+<#
+    .SYNOPSIS
 
-        .DESCRIPTION
+    .DESCRIPTION
 
-        .EXAMPLE
-    #>
+    .EXAMPLE
+
+#>
     [CmdletBinding()]
     param
     (
@@ -45,7 +46,14 @@ function Import-ChocoHelpersVariables
 
     # Add the datas as local variable in the calling scope ( -scope 1 )
     foreach ($Var in $ChocoData.Keys) {
-        New-Variable -Name $Var -Value $ChocoData.$Var -Scope 1
+        Write-Verbose "Importing variable $($ChocoData.$Var) in the script scope"
+
+        # Pathes with spaces workaround
+        if ($ChocoData.$Var -is [system.string]) {
+            New-Variable -Name $Var -Value "$($ChocoData.$Var)" -Scope Script
+        } else {
+            New-Variable -Name $Var -Value $ChocoData.$Var -Scope Script
+        }
     }
 
 }

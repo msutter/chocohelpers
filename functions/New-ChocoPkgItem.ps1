@@ -1,4 +1,13 @@
-function New-ChocoPkgItem {
+function New-ChocoPkgItem
+{
+<#
+    .SYNOPSIS
+
+    .DESCRIPTION
+
+    .EXAMPLE
+
+#>
     param(
           [Parameter(Mandatory=$true)]
           [String]$SourcePath,
