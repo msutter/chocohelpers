@@ -47,9 +47,9 @@ function Import-ChocoHelpersVariables
 
         # Pathes with spaces workaround
         if ($ChocoData.$Var -is [system.string]) {
-            New-Variable -Name $Var -Value "$($ChocoData.$Var)" -Scope Script
+            New-Variable -Name $Var -Value "$($ChocoData.$Var)" -Scope 2 -Force
         } else {
-            New-Variable -Name $Var -Value $ChocoData.$Var -Scope Script
+            New-Variable -Name $Var -Value $ChocoData.$Var -Scope 2 -Force
         }
     }
 
