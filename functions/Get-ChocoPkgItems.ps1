@@ -11,13 +11,13 @@ function Get-ChocoPkgItems
     [CmdletBinding()]
     param
     (
-        # [Parameter(Mandatory=$false)]
-        # [String]
-        # $Prefix = $script:Prefix,
+        [Parameter(Mandatory=$false)]
+        [String]
+        $Prefix,
 
-        # [Parameter(Mandatory=$false)]
-        # [String]
-        # $FilesPath = $script:FilesPath
+        [Parameter(Mandatory=$false)]
+        [String]
+        $FilesPath
     )
 
     $PkgItems  = New-Object System.Collections.ArrayList
