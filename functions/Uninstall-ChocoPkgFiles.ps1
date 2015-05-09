@@ -11,17 +11,17 @@ function Uninstall-ChocoPkgFiles
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false)]
-        [String]
-        $Prefix = $script:Prefix,
+        # [Parameter(Mandatory=$false)]
+        # [String]
+        # $Prefix = $script:Prefix,
 
-        [Parameter(Mandatory=$false)]
-        [String]
-        $FilesPath = $script:FilesPath,
+        # [Parameter(Mandatory=$false)]
+        # [String]
+        # $FilesPath = $script:FilesPath,
 
-        [Parameter(Mandatory=$false)]
-        [String]
-        $PackageId = $script:PackageId
+        # [Parameter(Mandatory=$false)]
+        # [String]
+        # $PackageId = $script:PackageId
     )
 
     $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath

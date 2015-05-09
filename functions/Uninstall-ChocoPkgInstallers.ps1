@@ -11,17 +11,17 @@ function Uninstall-ChocoPkgUninstallers
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false)]
-        [HashTable[]]
-        $Uninstallers = $script:Uninstallers,
+        # [Parameter(Mandatory=$false)]
+        # [HashTable[]]
+        # $Uninstallers = $script:Uninstallers,
 
-        [Parameter(Mandatory=$false)]
-        [String]
-        $FilesPath = $script:FilesPath,
+        # [Parameter(Mandatory=$false)]
+        # [String]
+        # $FilesPath = $script:FilesPath,
 
-        [Parameter(Mandatory=$false)]
-        [String]
-        $PackageId = $script:PackageId
+        # [Parameter(Mandatory=$false)]
+        # [String]
+        # $PackageId = $script:PackageId
     )
 
     foreach ($Uninstaller in $Uninstallers)

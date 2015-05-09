@@ -11,17 +11,17 @@ function Install-ChocoPkgInstallers
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false)]
-        [HashTable[]]
-        $Installers = $script:Installers,
+        # [Parameter(Mandatory=$false)]
+        # [HashTable[]]
+        # $Installers = $script:Installers,
 
-        [Parameter(Mandatory=$false)]
-        [String]
-        $FilesPath = $script:FilesPath,
+        # [Parameter(Mandatory=$false)]
+        # [String]
+        # $FilesPath = $script:FilesPath,
 
-        [Parameter(Mandatory=$false)]
-        [String]
-        $PackageId = $script:PackageId
+        # [Parameter(Mandatory=$false)]
+        # [String]
+        # $PackageId = $script:PackageId
     )
 
     foreach ($Installer in $Installers)
@@ -39,7 +39,6 @@ function Install-ChocoPkgInstallers
         }
 
         # Start the install Process
-
         Write-Verbose "FilesPath: ${FilesPath}"
 
         Write-Verbose "PackageId: ${PackageId}"
