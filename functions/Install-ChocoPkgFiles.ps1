@@ -11,17 +11,17 @@ function Install-ChocoPkgFiles
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$true)]
         [String]
-        $Prefix = $script:Prefix,
+        $Prefix,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$true)]
         [String]
-        $FilesPath = $script:FilesPath,
+        $FilesPath,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$true)]
         [String]
-        $PackageId = $script:PackageId
+        $PackageId
     )
 
     $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath

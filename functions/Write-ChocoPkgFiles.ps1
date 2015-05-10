@@ -11,13 +11,13 @@ function Write-ChocoPkgFiles
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$true)]
         [String]
-        $Prefix = $script:Prefix,
+        $Prefix,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$true)]
         [String]
-        $FilesPath = $script:FilesPath,
+        $FilesPath,
 
         [Parameter(Mandatory=$false, Position=1)]
         [switch]

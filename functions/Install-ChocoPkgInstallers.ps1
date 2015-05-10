@@ -11,17 +11,17 @@ function Install-ChocoPkgInstallers
     [CmdletBinding()]
     param
     (
+        [Parameter(Mandatory=$true)]
+        [String]
+        $FilesPath,
+
+        [Parameter(Mandatory=$true)]
+        [String]
+        $PackageId,
+
         [Parameter(Mandatory=$false)]
         [HashTable[]]
-        $Installers = $script:Installers,
-
-        [Parameter(Mandatory=$false)]
-        [String]
-        $FilesPath = $script:FilesPath,
-
-        [Parameter(Mandatory=$false)]
-        [String]
-        $PackageId = $script:PackageId
+        $Installers = @()
     )
 
     foreach ($Installer in $Installers)
