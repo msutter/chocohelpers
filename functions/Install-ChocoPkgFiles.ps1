@@ -24,6 +24,12 @@ function Install-ChocoPkgFiles
         $PackageId
     )
 
+    $VerbosePreference = $PSCmdlet.GetVariableValue('VerbosePreference')
+    $DebugPreference = $PSCmdlet.GetVariableValue('DebugPreference')
+
+    $callstack = Get-PSCallStack
+    Write-Verbose "Calling script: $($callstack[1].Location)"
+
     $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath
     $SortedItems = $Items | Sort -Property TargetPath
 

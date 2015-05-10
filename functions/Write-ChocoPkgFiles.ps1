@@ -24,6 +24,9 @@ function Write-ChocoPkgFiles
         $Uninstall
     )
 
+    $VerbosePreference = $PSCmdlet.GetVariableValue('VerbosePreference')
+    $DebugPreference = $PSCmdlet.GetVariableValue('DebugPreference')
+
     $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath
 
     if ($Uninstall) {

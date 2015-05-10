@@ -24,6 +24,9 @@ function Uninstall-ChocoPkgUninstallers
         $Uninstallers = @()
     )
 
+    $VerbosePreference = $PSCmdlet.GetVariableValue('VerbosePreference')
+    $DebugPreference = $PSCmdlet.GetVariableValue('DebugPreference')
+
     foreach ($Uninstaller in $Uninstallers)
     {
 

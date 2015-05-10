@@ -24,6 +24,9 @@ function Uninstall-ChocoPkgFiles
         $PackageId
     )
 
+    $VerbosePreference = $PSCmdlet.GetVariableValue('VerbosePreference')
+    $DebugPreference = $PSCmdlet.GetVariableValue('DebugPreference')
+
     $Items = Get-ChocoPkgItems -Prefix $Prefix -FilesPath $FilesPath
     $SortedItems = $Items | Sort -Property TargetPath -Descending
 
