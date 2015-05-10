@@ -41,7 +41,16 @@ function Import-ChocoHelpersVariables
     # Add files path to datas
     $null = $ChocoData.Add('FilesPath', $FilesPath)
 
-    Return $ChocoData
+    # Add the datas as local variable in the calling scope ( -scope 1 )
+    foreach ($Var in $ChocoData.Keys) {
+        Write-Verbose "Importing variable $($ChocoData.$Var) in the script scope"
 
+        # Pathes with spaces workaround
+        if ($ChocoData.$Var -is [system.string]) {
+            New-Variable -Name $Var -Value "$($ChocoData.$Var)" -Scope 1 -Force
+        } else {
+            New-Variable -Name $Var -Value $ChocoData.$Var -Scope 1 -Force
+        }
+    }
 }
 
