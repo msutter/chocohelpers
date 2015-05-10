@@ -38,15 +38,7 @@ function Install-ChocoPkgInstallers
             $InstallerPath = Join-Path "${FilesPath}" "$($Installer.File)"
         }
 
-        # Start the install Process
-        Write-Verbose "FilesPath: ${FilesPath}"
-
-        Write-Verbose "PackageId: ${PackageId}"
-        Write-Verbose "InstallerExtension: ${InstallerExtension}"
-        Write-Verbose "Installer Args: $($(Installer['Args']))"
-        Write-Verbose "InstallerPath: ${InstallerPath}"
-
-        Install-ChocolateyPackage $PackageId $InstallerExtension $Installer['Args'] "${InstallerPath}"
+        Install-ChocolateyPackage $PackageId $InstallerExtension $Installer.Args "${InstallerPath}"
 
     }
 
