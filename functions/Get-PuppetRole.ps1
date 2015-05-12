@@ -1,4 +1,4 @@
-Function Get-PuppeRole
+Function Get-PuppetRole
 {
 <#
     .SYNOPSIS

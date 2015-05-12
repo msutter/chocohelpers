@@ -11,7 +11,10 @@ function Invoke-ChocoBuildFeatures
   [CmdletBinding()]
   param(
         [Parameter(Mandatory=$false)]
-        [String]$FilesDirectoryName = 'files'
+        [String]$FilesDirectoryName = 'files',
+
+        [Parameter(Mandatory=$false)]
+        [String]$PartsDirectoryName = 'parts'
   )
 
   $VerbosePreference = $PSCmdlet.GetVariableValue('VerbosePreference')
@@ -26,6 +29,7 @@ function Invoke-ChocoBuildFeatures
   $ToolsPath = Split-Path -Parent $CallingScriptPath
   $PackagePath = Split-Path -Parent $ToolsPath
   $FilesPath = Join-Path $PackagePath $FilesDirectoryName
+  $PartsPath = Join-Path $PackagePath $PartsDirectoryName
 
   # Load Package variables (datas)
   $ChocoManifest = Get-ChocoManifest -ToolsPath "${ToolsPath}"
@@ -46,8 +50,30 @@ function Invoke-ChocoBuildFeatures
   }
   Write-Verbose '--------------------------------------------------------------'
 
+  # Define Parts merge dir
+
+  $ChocolateyPartsPath = Join-Path $env:ChocolateyInstall 'parts'
+  $PackagePartsMergePath = Join-Path $ChocolateyPartsPath "${PackageId}.${PackageVersion}"
+
   switch ($CallingScriptName) {
     'chocolateyInstall.ps1' {
+      #------- DEPLOY/MERGE ZIP PARTS WHEN PARTS PRESENT ---------#
+      if (Test-Path -Path "${PartsPath}") {
+        # Add merge path if absent
+        if (!(Test-Path -Path "${PackagePartsMergePath}")) {
+          $null = New-Item -ItemType Directory $PackagePartsMergePath
+        }
+
+        # Add Zip part to merge dir
+        Write-Verbose "Adding zip part to ${PackagePartsMergePath}"
+        $null = Get-ChildItem $PartsPath | Copy-Item -Destination $PackagePartsMergePath
+
+        if ("${PackageId}.${PackageVersion}" -eq (Split-Path $PackagePath -Leaf)) {
+          Write-Verbose "Merge Parts to Files"
+          ConvertFrom-ZipParts "$PackagePartsMergePath\Files.zip" $FilesPath
+        }
+      }
+
       #------- EXECUTE BEFORE-INSTALL SCRIPT WHEN PRESENT ---------#
       $BeforeInstallPath = "${ToolsPath}\chocolateyBeforeInstall.ps1"
       if (Test-Path -Path "${BeforeInstallPath}") {

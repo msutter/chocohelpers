@@ -10,7 +10,11 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Powershell Module providing Chocolatey Package Manager Helpers</description>
     <copyright>Marc Sutter 2014</copyright>
-    <tags>chocolateypkghelpers Chocolatey Powershell Module</tags>
+    <tags>chocoHelpers Chocolatey Powershell Module</tags>
+    <dependencies>
+      <dependency id="ZipParts" />
+    </dependencies>
+
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

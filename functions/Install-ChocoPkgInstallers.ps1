@@ -38,7 +38,7 @@ function Install-ChocoPkgInstallers
             $InstallerPath = Join-Path "${FilesPath}" "$($Installer.File)"
         }
 
-        Install-ChocolateyPackage $PackageId $InstallerExtension $Installer.Args "${InstallerPath}"
+        Install-ChocolateyInstallPackage $PackageId $InstallerExtension $Installer.Args "${InstallerPath}"
 
     }
 
