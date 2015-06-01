@@ -70,7 +70,10 @@ function Invoke-ChocoBuildFeatures
 
         if ("${PackageId}.${PackageVersion}" -eq (Split-Path $PackagePath -Leaf)) {
           Write-Verbose "Merge Parts to Files"
-          ConvertFrom-ZipParts "$PackagePartsMergePath\Files.zip" $FilesPath
+          ConvertFrom-ZipParts "$PackagePartsMergePath\Files.zip" "$PackagePartsMergePath\Files"
+
+          # Override FilesPath variable
+          $FilesPath = Join-Path $PackagePartsMergePath "Files"
         }
       }
 
@@ -101,11 +104,17 @@ function Invoke-ChocoBuildFeatures
           -FilesPath $FilesPath `
           -PackageId $PackageId
       }
+
     } # chocolateyUninstall.ps1
 
     'chocolateyUninstall.ps1' {
 
       #------- UNINSTALLATION -------#
+      if (Test-Path -Path "${PartsPath}") {
+        # Override FilesPath variable
+        $FilesPath = Join-Path $PackagePartsMergePath "Files"
+      }
+
       #------- BEFORE UNINSTALL SCRIPT ---------#
       $BeforeUninstallPath = "${ToolsPath}\chocolateyBeforeUninstall.ps1"
       if (Test-Path -Path "${BeforeUninstallPath}") {
@@ -133,6 +142,30 @@ function Invoke-ChocoBuildFeatures
         Write-Verbose "Executing ${AfterUninstallPath}"
         & "${AfterUninstallPath}"
       }
+
+      #------- CLEAN ZIP PARTS WHEN PARTS PRESENT ---------#
+      if (Test-Path -Path "${PartsPath}") {
+
+        # Remove Zip part from merge dir
+        Write-Verbose "Remove zip part from ${PackagePartsMergePath}"
+        $ZipPartNames = Get-ChildItem -Name $PartsPath
+        foreach ($ZipPartName in $ZipPartNames) {
+          Remove-Item (Join-Path $PackagePartsMergePath $ZipPartName)
+        }
+
+        if ("${PackageId}.${PackageVersion}" -eq (Split-Path $PackagePath -Leaf)) {
+
+          Write-Host "* Cleaning up part packages" -foreground green -background black
+          # Get all part sub packages
+          $chocolateyLib = Join-Path $env:ChocolateyInstall 'lib'
+          $LibSubPartPackages = Get-ChildItem $chocolateyLib | Where-Object {$_.name -like "${PackageId}-part*${PackageVersion}"}
+          $LibSubPartPackages | Remove-Item -Force -Recurse
+          Write-Host "* Done" -foreground green -background black
+          # Remove all zip parts
+          Remove-Item -Recurse -Force "$PackagePartsMergePath"
+        }
+      }
+
     } # chocolateyUninstall.ps1
   } # switch
 }
