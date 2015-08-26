@@ -46,7 +46,7 @@ function Install-ChocoPkgFiles
             Write-Verbose "Installing $($item.TargetPath) ($($item.ItemType))"
 
             if ($item.ItemType -eq 'directory') {
-                $null = New-Item -Type -Force Directory "$($item.TargetPath)"
+                $null = New-Item -Force -Type Directory "$($item.TargetPath)"
             } else {
                 $null = Copy-Item -Force "$($item.SourcePath)" "$($item.TargetPath)"
             }
