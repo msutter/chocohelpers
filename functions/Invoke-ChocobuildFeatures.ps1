@@ -72,8 +72,12 @@ function Invoke-ChocoBuildFeatures
           Write-Verbose "Merge Parts to Files"
           ConvertFrom-ZipParts "$PackagePartsMergePath\Files.zip" "$PackagePartsMergePath\Files"
 
-          # Override FilesPath variable
-          $FilesPath = Join-Path $PackagePartsMergePath "Files"
+          # # Override FilesPath variable
+          # $FilesPath = Join-Path $PackagePartsMergePath "Files"
+
+          # symlink the extracted FILES directory
+          $MergedFilesPath = Join-Path $PackagePartsMergePath "Files"
+          $null = cmd.exe /c mklink /D $FilesPath $MergedFilesPath
         }
       }
 
