@@ -68,7 +68,7 @@ function Invoke-ChocoBuildFeatures
         Write-Verbose "Adding zip part to ${PackagePartsMergePath}"
         $null = Get-ChildItem $PartsPath | Copy-Item -Destination $PackagePartsMergePath
 
-        if ("${PackageId}.${PackageVersion}" -eq (Split-Path $PackagePath -Leaf)) {
+        if ("${PackageId}" -eq (Split-Path $PackagePath -Leaf)) {
           Write-Verbose "Merge Parts to Files"
           ConvertFrom-ZipParts "$PackagePartsMergePath\Files.zip" "$PackagePartsMergePath\Files"
 
