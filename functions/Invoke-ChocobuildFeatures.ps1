@@ -157,7 +157,7 @@ function Invoke-ChocoBuildFeatures
           Remove-Item (Join-Path $PackagePartsMergePath $ZipPartName)
         }
 
-        if ("${PackageId}.${PackageVersion}" -eq (Split-Path $PackagePath -Leaf)) {
+        if ("${PackageId}" -eq (Split-Path $PackagePath -Leaf)) {
 
           Write-Host "* Cleaning up part packages" -foreground green -background black
           # Get all part sub packages
