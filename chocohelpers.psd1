@@ -12,7 +12,7 @@
 RootModule = 'chocoHelpers.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.1.0'
+ModuleVersion = '1.2.0'
 
 # ID used to uniquely identify this module
 GUID = '5c732b4a-9fb3-4c6d-961a-81a966b0e8b6'
