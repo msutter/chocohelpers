@@ -8,7 +8,7 @@ $pkgpath      = (get-item $myDir).parent.FullName
 $psmodulepath = "$pkgpath/files"
 
 if(Test-Path -Path "${installPath}"){
-  $null = Remove-Item -Recurse $installPath
+  $null = Remove-Item -Force -Recurse $installPath
 }
 
-$null = Copy-Item $psmodulepath $installPath -Recurse
+$null = Copy-Item $psmodulepath $installPath -Force -Recurse
